@@ -6,12 +6,35 @@ authors = [
     {name = "ester-17",email = "139085601+ester-17@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12.*"
+requires-python = "3.12.*"
 dependencies = [
     "fastapi[standard] (>=0.118.0,<0.119.0)"
 ]
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ['migrations']
+
+[tool.ruff.lint]
+preview = true  # Para mostrar o que está "lintando"
+# Seleciona as ferramentas desejadas:
+select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+# I = Isort -> ordenação de imports em ordem alfabética
+# F = Pyflakes -> procura por alguns erros em relação a boas práticas de código
+# E = pycodestyle -> erros de estilo de código
+# W = pucodestyle -> avisos sobre estilo de código
+# PL = Pylint -> "erros" em relação a boas práticas de código
+# PT = flake8-pytest -> boas práticas do Pytest
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.14.0,<0.15.0)"
+]
