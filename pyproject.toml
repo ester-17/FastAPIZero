@@ -6,7 +6,7 @@ authors = [
     {name = "ester-17",email = "139085601+ester-17@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.13,<4.0"
+requires-python = ">=3.12.*"
 dependencies = [
     "fastapi[standard] (>=0.118.0,<0.119.0)"
 ]
