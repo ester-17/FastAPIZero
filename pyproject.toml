@@ -5,10 +5,13 @@ description = ""
 authors = [
     {name = "ester-17",email = "139085601+ester-17@users.noreply.github.com"}
 ]
-readme = "README.md"
-requires-python = "3.12.*"
-dependencies = [
-    "fastapi[standard] (>=0.118.0,<0.119.0)"
+
+[dependency-groups]
+dev = [
+    "pytest (>=8.4.2,<9.0.0)",
+    "pytest-cov (>=7.0.0,<8.0.0)",
+    "taskipy (>=1.14.1,<2.0.0)",
+    "ruff (>=0.13.0,<0.14.0)"
 ]
 
 [tool.ruff]
@@ -27,14 +30,23 @@ select = ['I', 'F', 'E', 'W', 'PL', 'PT']
 # PT = flake8-pytest -> boas práticas do Pytest
 
 
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = '-p no:warnings'
+
+[tool.taskipy.tasks]
+lint = 'ruff check'
+pre_format = 'ruff check --fix'
+format = 'ruff format'
+run = 'fastapi dev fast_zero/app.py'
+pre_test = 'task lint'
+test = 'pytest -s -x --cov=fast_zero -vv'
+post_test = 'coverage html'
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry]
-
-
-[dependency-groups]
-dev = [
-    "ruff (>=0.14.0,<0.15.0)"
-]
