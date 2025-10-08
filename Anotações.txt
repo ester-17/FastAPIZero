@@ -3,4 +3,6 @@ ANOTAÇÕES
 C:\Users\ester\AppData\Roaming\Python\Python312\site-packages
 
 05/10/2025
-Aula 01 42:33
+Aula 01 1:43:43
+
+Having some warnings, need to change .toml file and reinstall
