@@ -7,7 +7,7 @@ authors = [
     {name = "ester-17",email = "139085601+ester-17@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = "3.12.*"
+requires-python = "^3.12"
 dependencies = [
     "fastapi[standard] (>=0.118.0,<0.119.0)"
 ]
@@ -15,6 +15,32 @@ dependencies = [
 [tool.pytest.ini_options]
 pythonpath = "."
 addopts = '-p no:warnings'
+
+[tool.taskipy.tasks]
+run = 'fastapi dev fastapi_zero/app.py'
+test = 'pytest -s -x --cov=fastapi_zero -vv'    # executes in a verbose way
+post_test = 'coverage html'
+lint = 'ruff check . && ruff check . --diff'    # mostra onde precisa corrigir o código
+format = 'ruff check . --fix && ruff format .'  # corrige o código
+
+[tool.poetry]
+name = "fastapi-zero"
+version = "0.1.0"
+description = "FastAPI Zero - Curso FastAPI"
+authors = ["ester-17 <139085601+ester-17@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "fastapi_zero"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = { version = ">=0.118.0,<0.119.0", extras = ["standard"] }
+
+[tool.poetry.group.dev.dependencies]
+ruff = ">=0.14.0,<0.15.0"
+pytest = "^8.0"
+pytest-cov = ">=7.0.0,<8.0.0"
+
+
 
 [tool.ruff]
 line-length = 79
@@ -31,17 +57,14 @@ select = ['I', 'F', 'E', 'W', 'PL', 'PT']
 # PL = Pylint -> "erros" em relação a boas práticas de código
 # PT = flake8-pytest -> boas práticas do Pytest
 
-
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry]
-
 
 [dependency-groups]
 dev = [
     "ruff (>=0.14.0,<0.15.0)",
     "pytest (>=8.4.2,<9.0.0)",
-    "pytest-cov (>=7.0.0,<8.0.0)"
+    "pytest-cov (>=7.0.0,<8.0.0)",
+    "taskipy (>=1.14.1,<2.0.0)"
 ]
